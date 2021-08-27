@@ -1,3 +1,4 @@
+import 'package:disenos_app/src/pages/launcher_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: SliverListPage()
+      home: LauncherPage()
     );
   }
 }
