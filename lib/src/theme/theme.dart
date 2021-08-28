@@ -62,7 +62,14 @@ class ThemeChanger with ChangeNotifier {
     _darkTheme = false;
 
      if (value) {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.dark().copyWith(
+        accentColor: Color(0xFF48A0EB),
+        primaryColorLight: Colors.white,
+        scaffoldBackgroundColor: Color(0xFF16202B),
+        textTheme: TextTheme(
+          bodyText2: TextStyle(color: Colors.white)
+        )
+      );
     } else {
       _currentTheme = ThemeData.light();
     }
