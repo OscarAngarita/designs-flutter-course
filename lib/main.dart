@@ -1,4 +1,5 @@
 import 'package:disenos_app/src/pages/launcher_page.dart';
+import 'package:disenos_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 
@@ -11,9 +12,15 @@ import 'package:flutter/material.dart';
 // import 'package:disenos_app/src/pages/emergency_page.dart';
 
 import 'package:disenos_app/src/pages/sliver_list_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => new ThemeChanger(),
+      child: MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {

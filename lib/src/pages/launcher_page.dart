@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:disenos_app/src/theme/theme.dart';
 import 'package:disenos_app/src/routes/routes.dart';
 
 
@@ -23,9 +25,6 @@ class _ListaOpciones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    
-
     return ListView.separated(
       physics: BouncingScrollPhysics(),
       separatorBuilder: (context, i) => Divider(
@@ -49,6 +48,9 @@ class _MenuPrincipal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Drawer(
       child: Container(
         child: Column(
@@ -73,19 +75,25 @@ class _MenuPrincipal extends StatelessWidget {
               leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
               title: Text('Dark Mode'),
               trailing: Switch.adaptive( //Adapts to android and IOS design
-                value: true, 
+                value: appTheme.darkTheme, 
                 activeColor: Colors.blue,
-                onChanged: (value){}
+                onChanged: (value) => appTheme.darkTheme = value
               ),
             ),
 
-            ListTile(
-              leading: Icon(Icons.add_to_home_screen_outlined, color: Colors.blue),
-              title: Text('Custom Theme'),
-              trailing: Switch.adaptive( //Adapts to android and IOS design
-                value: true, 
-                activeColor: Colors.blue,
-                onChanged: (value){}
+            SafeArea(
+              bottom: true,
+              left: false,
+              top: false,
+              right: false,
+              child: ListTile(
+                leading: Icon(Icons.add_to_home_screen_outlined, color: Colors.blue),
+                title: Text('Custom Theme'),
+                trailing: Switch.adaptive( //Adapts to android and IOS design
+                  value: appTheme.customTheme, 
+                  activeColor: Colors.blue,
+                  onChanged: (value) => appTheme.customTheme = value
+                ),
               ),
             )
           ],
