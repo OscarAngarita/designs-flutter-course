@@ -1,5 +1,9 @@
-import 'package:disenos_app/src/widgets/radial_progress.dart';
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+
+import 'package:disenos_app/src/theme/theme.dart';
+import 'package:disenos_app/src/widgets/radial_progress.dart';
 
 
 class GraficasCircularesPages extends StatefulWidget {
@@ -16,6 +20,7 @@ class _GraficasCircularesPagesState extends State<GraficasCircularesPages> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.refresh),
@@ -34,15 +39,15 @@ class _GraficasCircularesPagesState extends State<GraficasCircularesPages> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget> [
-              CustomRadialProgress(porcentaje: porcentaje, colorPrimario: Colors.pink, shaderOn: false),
               CustomRadialProgress(porcentaje: porcentaje, colorPrimario: Colors.lightGreen, shaderOn: false),
+              CustomRadialProgress(porcentaje: porcentaje * 1.2, colorPrimario: Colors.pink, shaderOn: false),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget> [
-              CustomRadialProgress(porcentaje: porcentaje, colorPrimario: Colors.purple, shaderOn: false),
-              CustomRadialProgress(porcentaje: porcentaje, colorPrimario: Colors.green, shaderOn: true),
+              CustomRadialProgress(porcentaje: porcentaje * 1.4, colorPrimario: Colors.purple, shaderOn: false),
+              CustomRadialProgress(porcentaje: porcentaje * 1.6, colorPrimario: Colors.green, shaderOn: true),
             ],
           ),
         ],
@@ -66,13 +71,16 @@ class CustomRadialProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Container(
       width: 200,
       height: 200,
       child: RadialProgress(
         porcentaje: porcentaje,
         colorPrimario: this.colorPrimario,
-        colorSecundario: Colors.grey,
+        colorSecundario: appTheme.textTheme.bodyText2.color,
         grosorSecundario: 4,
         grosorPrimario: 10,
         shaderOn: this.shaderOn,

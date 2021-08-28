@@ -217,13 +217,18 @@ class _HeaderCurvoPainter extends CustomPainter {
 
 //Wave
 class HeaderWave extends StatelessWidget {
+
+  final Color color;
+
+  const HeaderWave({@required this.color});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _HeaderWavePainter(),
+        painter: _HeaderWavePainter(this.color),
       ),
     );
   }
@@ -232,13 +237,18 @@ class HeaderWave extends StatelessWidget {
 
 
 class _HeaderWavePainter extends CustomPainter {
+
+  final Color color;
+
+  _HeaderWavePainter(this.color);
+
   @override
   void paint(Canvas canvas, Size size) {
     
     final lapiz = Paint(); //El lapiz para dibujar la figura, comunmente llamado paint
 
     // Propiedades
-    lapiz.color = Color(0xff615AAB); //Definiendo color del lapiz
+    lapiz.color = this.color; //Color(0xff615AAB)  //Definiendo color del lapiz
     lapiz.style = PaintingStyle.fill; //Forma de pintar, alternativo .fill o .stroke
     lapiz.strokeWidth = 2;
 
