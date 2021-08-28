@@ -25,16 +25,19 @@ class _ListaOpciones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return ListView.separated(
       physics: BouncingScrollPhysics(),
       separatorBuilder: (context, i) => Divider(
-        color: Colors.blue,
+        color: appTheme.primaryColorLight,
       ), 
       itemCount: pageRoutes.length,
       itemBuilder: (context, i) => ListTile(
-        leading: FaIcon(pageRoutes[i].icon, color: Colors.blue,),
+        leading: FaIcon(pageRoutes[i].icon, color: appTheme.accentColor,),
         title: Text(pageRoutes[i].titulo),
-        trailing: Icon(Icons.chevron_right, color: Colors.blue,),
+        trailing: Icon(Icons.chevron_right, color: appTheme.accentColor,),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => pageRoutes[i].page));
         },
@@ -50,6 +53,7 @@ class _MenuPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
     
     final appTheme = Provider.of<ThemeChanger>(context);
+    final themeAccentColor = appTheme.currentTheme.accentColor;
 
     return Drawer(
       child: Container(
@@ -61,7 +65,7 @@ class _MenuPrincipal extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 child: CircleAvatar(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: themeAccentColor,
                   child: Text('OA', style: TextStyle(fontSize: 50),),
                 ),
               ),
@@ -72,11 +76,11 @@ class _MenuPrincipal extends StatelessWidget {
             ),
 
             ListTile(
-              leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
+              leading: Icon(Icons.lightbulb_outline, color: themeAccentColor),
               title: Text('Dark Mode'),
               trailing: Switch.adaptive( //Adapts to android and IOS design
                 value: appTheme.darkTheme, 
-                activeColor: Colors.blue,
+                activeColor: themeAccentColor,
                 onChanged: (value) => appTheme.darkTheme = value
               ),
             ),
@@ -87,11 +91,11 @@ class _MenuPrincipal extends StatelessWidget {
               top: false,
               right: false,
               child: ListTile(
-                leading: Icon(Icons.add_to_home_screen_outlined, color: Colors.blue),
+                leading: Icon(Icons.add_to_home_screen_outlined, color: themeAccentColor),
                 title: Text('Custom Theme'),
                 trailing: Switch.adaptive( //Adapts to android and IOS design
                   value: appTheme.customTheme, 
-                  activeColor: Colors.blue,
+                  activeColor: themeAccentColor,
                   onChanged: (value) => appTheme.customTheme = value
                 ),
               ),
