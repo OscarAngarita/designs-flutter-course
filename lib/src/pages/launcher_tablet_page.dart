@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:disenos_app/src/pages/slideshow_page.dart';
 import 'package:disenos_app/src/theme/theme.dart';
 import 'package:disenos_app/src/routes/routes.dart';
 
@@ -12,15 +13,36 @@ class LauncherTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    final appTheme = Provider.of<ThemeChanger>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Diseños en Flutter - Tablet'),
-        backgroundColor: appTheme.accentColor,
+        backgroundColor: appTheme.currentTheme.accentColor,
       ),
       drawer: _MenuPrincipal(),
-      body: _ListaOpciones()
+      // body: _ListaOpciones()
+
+      body: Row(
+        children: <Widget>[
+          Container(
+            width: 300.0,
+            height: double.infinity,
+            child: _ListaOpciones(),
+          ),
+
+          Container(
+            width: 1,
+            height: double.infinity,
+            color: (appTheme.darkTheme) ? Colors.grey : appTheme.currentTheme.accentColor,
+          ),
+          
+          Expanded( //Expanded used because it's all the space left in the screen
+            child: SlideshowPage()
+          ) 
+        ],
+      )
+
    );
   }
 }
