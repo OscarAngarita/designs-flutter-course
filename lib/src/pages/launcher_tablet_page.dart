@@ -1,3 +1,4 @@
+import 'package:disenos_app/src/models/layout_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ class LauncherTabletPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final appTheme = Provider.of<ThemeChanger>(context);
+    final layoutModel = Provider.of<LayoutModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +40,7 @@ class LauncherTabletPage extends StatelessWidget {
           ),
           
           Expanded( //Expanded used because it's all the space left in the screen
-            child: SlideshowPage()
+            child: layoutModel.currentPage
           ) 
         ],
       )
@@ -65,7 +67,10 @@ class _ListaOpciones extends StatelessWidget {
         title: Text(pageRoutes[i].titulo),
         trailing: Icon(Icons.chevron_right, color: appTheme.accentColor,),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => pageRoutes[i].page));
+          // Navigator.push(context, MaterialPageRoute(builder: (context) => pageRoutes[i].page));
+          final layoutModel = Provider.of<LayoutModel>(context, listen: false);
+          layoutModel.currentPage = pageRoutes[i].page;
+
         },
       ), 
     );
